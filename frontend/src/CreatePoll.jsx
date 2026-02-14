@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const BACKEND_URL = "https://real-time-poll-backend.onrender.com";
+
 function CreatePoll() {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", ""]);
@@ -16,7 +18,7 @@ function CreatePoll() {
   };
 
   const createPoll = async () => {
-    const response = await fetch("http://localhost:5000/polls", {
+    const response = await fetch(`${BACKEND_URL}/polls`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ question, options }),

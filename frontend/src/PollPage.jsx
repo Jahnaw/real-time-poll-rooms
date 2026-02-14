@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000");
+const BACKEND_URL = "https://real-time-poll-backend.onrender.com";
+const socket = io(BACKEND_URL);
 
 function PollPage() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ function PollPage() {
   const [hasVoted, setHasVoted] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/polls/${id}`)
+    fetch(`${BACKEND_URL}/polls/${id}`)
       .then((res) => res.json())
       .then(setPoll);
 
@@ -44,7 +45,7 @@ function PollPage() {
     }
 
     const response = await fetch(
-      `http://localhost:5000/polls/${id}/vote`,
+      `${BACKEND_URL}/polls/${id}/vote`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
